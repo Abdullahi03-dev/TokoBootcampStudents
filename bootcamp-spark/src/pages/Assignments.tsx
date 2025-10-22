@@ -412,8 +412,8 @@ interface Submission {
   grade: string;
   submitted_at: string | null;
 }
-
-const BASE = "http://localhost:8000/assignments";
+const API_URL=import.meta.env.VITE_API_URL
+const BASE = `${API_URL}/assignments`;
 
 export default function AssignmentsPage() {
   const [assignments, setAssignments] = useState<Assignment[]>([]);

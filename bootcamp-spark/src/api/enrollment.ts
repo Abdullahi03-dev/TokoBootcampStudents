@@ -44,7 +44,8 @@
 
 
 import axios from "axios";
-const API_BASE = "http://127.0.0.1:8000/enrollments";
+const API_URL=import.meta.env.VITE_API_URL
+const API_BASE = `${API_URL}/enrollments`;
 
 export const enrollCourse = async (email: string, courseId: number) => {
   const res = await axios.post(`${API_BASE}/`, {
@@ -98,7 +99,7 @@ export const markEnrollmentComplete = async (email: string, courseId?: number) =
 };
 
 export async function checkEnrollmentStatus(email: string) {
-  const res = await fetch(`http://localhost:8000/enrollments/check/${email}`);
+  const res = await fetch(`${API_BASE}/enrollments/check/${email}`);
   if (!res.ok) throw new Error("Failed to check enrollment status");
   return res.json();
 }
@@ -106,7 +107,7 @@ export async function checkEnrollmentStatus(email: string) {
 
 
 
-export const clearCompletedLessons = async (email: string) => {
-  const res = await axios.delete(`/enrollments/clear_completed/${email}`);
-  return res.data;
-};
+// export const clearCompletedLessons = async (email: string) => {
+//   const res = await axios.delete(`/enrollments/clear_completed/${email}`);
+//   return res.data;
+// };

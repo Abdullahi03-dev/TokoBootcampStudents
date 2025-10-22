@@ -1,6 +1,7 @@
+const API_URL=import.meta.env.VITE_API_URL
 export async function fetchCourses() {
     try {
-      const response = await fetch("http://localhost:8000/courses/");
+      const response = await fetch(`${API_URL}/courses/`);
       if (!response.ok) throw new Error("Failed to fetch courses");
       return await response.json();
     } catch (error) {
@@ -13,7 +14,7 @@ export async function fetchCourses() {
 
 
 export const fetchCourseById = async (id: number) => {
-  const res = await fetch(`http://localhost:8000/courses/${id}`);
+  const res = await fetch(`${API_URL}/courses/${id}`);
   if (!res.ok) throw new Error("Failed to fetch course");
   return res.json();
 };

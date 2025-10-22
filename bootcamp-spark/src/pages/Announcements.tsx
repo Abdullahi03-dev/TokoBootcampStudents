@@ -165,6 +165,7 @@ interface Announcement {
 }
 
 const Announcements = () => {
+  const API_URL=import.meta.env.VITE_API_URL
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -174,7 +175,7 @@ const Announcements = () => {
         const email = localStorage.getItem("emailBootcamp");
         if (!email) return;
 
-        const res = await axios.get(`http://localhost:8000/announcements/user/${email}`);
+        const res = await axios.get(`${API_URL}/announcements/user/${email}`);
         const data = res.data.map((item: any) => ({
           ...item,
           date: new Date(item.date).toLocaleDateString("en-US", {
