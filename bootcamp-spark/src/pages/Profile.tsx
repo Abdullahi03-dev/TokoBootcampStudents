@@ -376,6 +376,7 @@ const Profile = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const email = localStorage.getItem("emailBootcamp"); // 👈 Email stored after login
+  const API_URL=import.meta.env.VITE_API_URL
 
   // Fetch user info
   useEffect(() => {
@@ -385,7 +386,7 @@ const Profile = () => {
     }
 
     axios
-      .get(`http://localhost:8000/auth/profile/${email}`)
+      .get(`${API_URL}/auth/profile/${email}`)
       .then((res) => {
         setUser(res.data);
         setName(res.data.name);
@@ -404,7 +405,7 @@ const Profile = () => {
     formData.append("name", name);
 
     try {
-      const res = await axios.put("http://localhost:8000/auth/profile/update", formData);
+      const res = await axios.put(`${API_URL}/auth/profile/update`, formData);
       toast.success(res.data.msg);
     } catch (err) {
       toast.error("Error updating profile");
@@ -422,7 +423,7 @@ const Profile = () => {
     formData.append("password", password);
 
     try {
-      const res = await axios.put("http://localhost:8000/auth/profile/update", formData);
+      const res = await axios.put(`${API_URL}/auth/profile/update`, formData);
       toast.success(res.data.msg);
       setPassword("");
       setConfirmPassword("");
